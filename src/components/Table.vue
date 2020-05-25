@@ -1,6 +1,5 @@
 <template>
 <div>
-    {{pagesTotal}}  
     <table>
         <thead>
             <tr>
@@ -29,11 +28,7 @@
     </table>
         <ul class="pagination">
             <li class="page-item"><a href="#" class="page-link">prev</a></li>
-            <li class="page-item"><a href="#" class="page-link">1</a></li>
-            <li class="page-item"><a href="#" class="page-link">2</a></li>
-            <li class="page-item"><a href="#" class="page-link">3</a></li>
-            <li class="page-item"><a href="#" class="page-link">4</a></li>
-            <li class="page-item"><a href="#" class="page-link">5</a></li>
+            <li class="page-item" v-for="i in pagesArray" v-bind:key="i.name"><a href="#" class="page-link">{{ i.name }}</a></li>
             <li class="page-item"><a href="#" class="page-link">next</a></li>
         </ul>
 </div>
@@ -57,8 +52,40 @@ export default {
            if (this.tableDate != null) {
                return Math.ceil(this.tableData.length / this.perPage)
            } else {
-               return 0;
+               return 0
            }
+       },
+       pagesStart() {
+           if (this.pagesCurrent === 1) {
+               return 1
+           }
+
+           if (this.pagesCurrent === 2) {
+               return this.pagesCurrent - 1
+           }
+
+           if (this.pagesCurrent === this.pagesTotal) {
+               if ((this.pagesTotal - this.maxVisibleButtons + 1) <= 0) {
+                   return 1
+               }
+
+               return this.pagesTotal - this.maxVisibleButtons + 2
+           }
+
+           return this.pagesCurrent - 2
+       },
+       pagesEnd() {
+           return Math.min(this.pagesStart + this.maxVisibleButtons - 1, this.pagesTotal);
+       },
+       pagesArray() {
+           const range = []
+           for (let i = this.pagesStart; i <= this.pagesEnd; i++) {
+               range.push({
+                   name: i,
+                   isDisabled: i === this.pagesCurrent
+               })
+           }
+           return range
        },
    },
    mounted() {
