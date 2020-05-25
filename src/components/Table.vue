@@ -24,9 +24,11 @@
         </tbody>
     </table>
         <ul class="pagination">
+            <li class="page-item" v-on:click="changePageFirst()"><a href="#" class="page-link">first</a></li>
             <li class="page-item" v-on:click="prevPage()"><a href="#" class="page-link">prev</a></li>
             <li class="page-item" v-for="i in pagesArray" v-bind:key="i.name" v-on:click="changePage(i.name)"><a href="#" class="page-link">{{ i.name }}</a></li>
-            <li class="page-item" v-on:click="nextPage()"><a href="#" class="page-link">next</a></li>
+            <li class="page-item" v-on:click="prevPage()"><a href="#" class="page-link">prev</a></li>
+            <li class="page-item" v-on:click="changePageLast()"><a href="#" class="page-link">last ({{pagesTotal}})</a></li>
         </ul>
 </div>
 </template>
@@ -110,6 +112,12 @@ export default {
         },
         prevPage() {
             if (this.pagesCurrent > 1) { this.pagesCurrent-- }
+        },
+        changePageFirst() {
+            this.pagesCurrent = 1
+        },
+        changePageLast() {
+            this.pagesCurrent = this.pagesTotal
         }
    },
 }
