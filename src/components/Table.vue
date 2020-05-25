@@ -49,7 +49,7 @@ export default {
    },
    computed: {
        pagesTotal() {
-           if (this.tableDate != null) {
+           if (this.tableData != null) {
                return Math.ceil(this.tableData.length / this.perPage)
            } else {
                return 0
