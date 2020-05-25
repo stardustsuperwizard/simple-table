@@ -1,6 +1,6 @@
 <template>
 <div>
-    <!-- {{tableData}}   -->
+    {{pagesTotal}}  
     <table>
         <thead>
             <tr>
@@ -46,8 +46,20 @@ export default {
        return {
            tableData: null,
            tableMsg: null,
-           url: "http://127.0.0.1:5000/api/records/nba_elo/?season=2018"
+           url: "http://127.0.0.1:5000/api/records/nba_elo/?season=2018",
+           maxVisibleButtons: 5,
+           pagesCurrent: 1,
+           perPage: 5,
        }
+   },
+   computed: {
+       pagesTotal() {
+           if (this.tableDate != null) {
+               return Math.ceil(this.tableData.length / this.perPage)
+           } else {
+               return 0;
+           }
+       },
    },
    mounted() {
        this.setupTable()
