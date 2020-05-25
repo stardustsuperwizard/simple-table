@@ -1,6 +1,6 @@
 <template>
 <div>
-    {{tableData}}
+    <!-- {{tableData}}   -->
     <table>
         <thead>
             <tr>
@@ -27,6 +27,15 @@
             </tr>
         </tbody>
     </table>
+        <ul class="pagination">
+            <li class="page-item"><a href="#" class="page-link">prev</a></li>
+            <li class="page-item"><a href="#" class="page-link">1</a></li>
+            <li class="page-item"><a href="#" class="page-link">2</a></li>
+            <li class="page-item"><a href="#" class="page-link">3</a></li>
+            <li class="page-item"><a href="#" class="page-link">4</a></li>
+            <li class="page-item"><a href="#" class="page-link">5</a></li>
+            <li class="page-item"><a href="#" class="page-link">next</a></li>
+        </ul>
 </div>
 </template>
 
@@ -55,3 +64,21 @@ export default {
    }
 }
 </script>
+
+<style scoped>
+    .pagination {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .page-item {
+        display: inline;
+        padding: 5px;
+    }
+
+    .page-link {
+        /* display: block; */
+        /* padding: 8px; */
+    }
+</style>
